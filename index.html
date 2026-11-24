@@ -13,7 +13,7 @@
 }
 :root{
   /* Layout: a slim control bar on top, then two (or three) equal timer cards side by side that fill the rest of the window.
-     Card states: white under 200s, pale green from 200, pulsing orange with CLOSE NOW from 207, solid red from 215, black with WA 3YE9TI SED from 370. The count stops at 999. */
+     Card states: white under 200s, pale green from 200, pulsing orange from 207 (its button reads CLOSE NOW), solid red from 215, black with WA 3YE9TI SED from 370. The count stops at 999. */
   --bg:#F6F7F9;
   --card:#FFFFFF;
   --line:#D9DDE3;
@@ -22,7 +22,7 @@
   --muted:#5B6472;
   --accent:#2563EB;
   --green:#16A34A;  --green-tint:#DCFCE7; --green-deep:#15803D;
-  --orange:#EA580C; --orange-tint:#FFEDD5; --orange-strong:#FDBA74; --orange-deep:#C2410C; --close-ink:#7C2D12;
+  --orange:#EA580C; --orange-tint:#FFEDD5; --orange-strong:#FDBA74; --orange-deep:#C2410C;
   --red:#DC2626;    --red-deep:#B91C1C;
   --note:#991B1B;
   --font-ui:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -166,22 +166,19 @@ body.three .stage{--cols:3}
 .timer[data-state="orange"] .num{color:var(--orange-deep)}   /* deeper orange: stays readable at the peak of the pulse */
 .timer[data-state="red"] .num{color:#FFFFFF}
 .timer[data-state="black"] .num{color:#FFFFFF}
-/* Top labels, above the number; the number moves down to make room.
-   "CLOSE NOW" while the card is orange, "WA 3YE9TI SED" while it is black. */
-.close,.wake{
+/* Top label, above the number, while the card is black; the number moves down to make room. */
+.wake{
   display:none; position:absolute; left:50%; top:0; transform:translateX(-50%); white-space:nowrap; text-align:center;
   font-size:var(--close-fs,14px); font-weight:900; line-height:1.1; letter-spacing:.04em; pointer-events:none;
 }
-.close{color:var(--close-ink)}
 .wake{color:#FFFFFF}
 .wake.two span{display:block}   /* narrow cards: two lines, so the text stays big */
-.timer[data-state="orange"] .close{display:block}
 .timer[data-state="black"] .wake{display:block}
 .close-probe{
   position:absolute; left:-9999px; top:0; visibility:hidden; white-space:nowrap; pointer-events:none;
   font-size:100px; font-weight:900; line-height:1.1; letter-spacing:.04em;
 }
-/* "Stop this timer first": under the number inside the third card; the number moves up to make room. */
+/* "Reset this timer first": under the number inside the third card; the number moves up to make room. */
 .note{
   display:none; position:absolute; left:50%; bottom:0; transform:translateX(-50%);
   width:max-content; max-width:100%; padding:.15em .6em; text-align:center; text-wrap:balance;
@@ -206,7 +203,9 @@ body.three .stage{--cols:3}
 .timer.is-running .go{background:#FFFFFF; color:var(--ink); border-color:var(--ink)}
 .timer.is-running .go:hover{filter:brightness(.96)}
 .timer.is-running .go::before{width:.62em; height:.62em; clip-path:none; border-radius:1px}
-.probe{position:absolute; left:0; top:0; visibility:hidden; pointer-events:none; padding-left:1.12em}
+/* 207-214: the button itself says CLOSE NOW (it still resets when pressed). No icon, so the words get the full width. */
+.timer[data-state="orange"] .go{padding:0 2px; letter-spacing:.02em}
+.timer[data-state="orange"] .go::before{display:none}
 
 .last{
   flex:none; text-align:center; white-space:nowrap;
@@ -243,23 +242,23 @@ body.three .stage{--cols:3}
 <div class="wrap">
   <main class="stage" id="stage">
     <section class="timer" aria-label="Timer 1" data-state="base">
-      <div class="numbox"><div class="close">CLOSE NOW</div><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 1 seconds">0</div></div>
-      <button class="go" id="go-1" type="button" aria-label="Start timer 1"><span class="go-text">START</span><span class="probe" aria-hidden="true">STOP / RESET</span></button>
+      <div class="numbox"><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 1 seconds">0</div></div>
+      <button class="go" id="go-1" type="button" aria-label="Start timer 1"><span class="go-text">START</span></button>
       <div class="last">Last: –</div>
     </section>
     <section class="timer" aria-label="Timer 2" data-state="base">
-      <div class="numbox"><div class="close">CLOSE NOW</div><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 2 seconds">0</div></div>
-      <button class="go" id="go-2" type="button" aria-label="Start timer 2"><span class="go-text">START</span><span class="probe" aria-hidden="true">STOP / RESET</span></button>
+      <div class="numbox"><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 2 seconds">0</div></div>
+      <button class="go" id="go-2" type="button" aria-label="Start timer 2"><span class="go-text">START</span></button>
       <div class="last">Last: –</div>
     </section>
     <section class="timer" aria-label="Timer 3" data-state="base" hidden>
-      <div class="numbox"><div class="close">CLOSE NOW</div><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 3 seconds">0</div><div class="note" role="status">Stop this timer first</div></div>
-      <button class="go" id="go-3" type="button" aria-label="Start timer 3"><span class="go-text">START</span><span class="probe" aria-hidden="true">STOP / RESET</span></button>
+      <div class="numbox"><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 3 seconds">0</div><div class="note" role="status">Reset this timer first</div></div>
+      <button class="go" id="go-3" type="button" aria-label="Start timer 3"><span class="go-text">START</span></button>
       <div class="last">Last: –</div>
     </section>
   </main>
 </div>
-<span class="close-probe" id="close-probe" aria-hidden="true">CLOSE NOW</span>
+<span class="close-probe" id="close-probe" aria-hidden="true">WA 3YE9TI SED</span>
 
 <script>
 (() => {
@@ -268,7 +267,7 @@ body.three .stage{--cols:3}
   /* ---------- rules ---------- */
   const T_IN = 200, T_CLOSE = 207, T_OVER = 215;   // green, orange (close the case now), red
   const T_WAKE = 370;                              // black card with the WA 3YE9TI SED label
-  const T_MAX = 999;                               // the count stops here until STOP / RESET
+  const T_MAX = 999;                               // the count stops here until RESET
   const ALERTS = [T_CLOSE];                        // one chime, at 207
   const stateFor = s => s >= T_WAKE ? 'black' : s >= T_OVER ? 'red' : s >= T_CLOSE ? 'orange' : s >= T_IN ? 'green' : 'base';
   const BASE_TITLE = document.title;
@@ -284,11 +283,12 @@ body.three .stage{--cols:3}
   const blank = () => ({ running: false, startedAt: null, capped: false, last: null, fired: { 207: false } });
   let timers = [blank(), blank(), blank()];
   let three = false;      // third timer shown
-  let volume = 100;       // 0 = off, 100 = loudest
-  let lastVolume = 100;   // restored by the speaker button after muting
+  const PREFS = 2;        // bumped when the sound defaults change, so the new default applies once
+  let volume = 0;         // 0 = off, 100 = loudest. The page starts muted.
+  let lastVolume = 50;    // restored by the speaker button after muting; the first unmute lands on the middle
   const clampVol = v => Math.min(100, Math.max(0, Math.round(v)));
-  // Even steps in loudness: each slider step is 0.4 dB, so the range spans 40 dB from barely audible to max.
-  const gainFor = v => v <= 0 ? 0 : Math.pow(10, (v - 100) * 0.4 / 20);
+  // Square-law taper, like a hi-fi volume knob: the middle is a quarter of the signal (about half as loud as max).
+  const gainFor = v => v <= 0 ? 0 : Math.pow(v / 100, 2);
   let size = 'medium';
 
   // A capped timer has stopped counting for good: it reads 999 whatever the clock says.
@@ -311,16 +311,17 @@ body.three .stage{--cols:3}
     try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; }
   }
   function save() {
-    try { localStorage.setItem(KEY, JSON.stringify({ timers, three, volume, lastVolume, size })); } catch (e) { /* works without persistence */ }
+    try { localStorage.setItem(KEY, JSON.stringify({ timers, three, volume, lastVolume, size, prefs: PREFS })); } catch (e) { /* works without persistence */ }
   }
   function adopt(saved) {
     const list = saved && Array.isArray(saved.timers) ? saved.timers : [];
     timers = [cleanTimer(list[0]), cleanTimer(list[1]), cleanTimer(list[2])];
     three = !!(saved && saved.three === true) || timers[2].running;   // a running third timer is never hidden
     if (!three) timers[2] = blank();
-    if (saved && Number.isFinite(saved.volume)) volume = clampVol(saved.volume);
-    else if (saved && saved.muted === true) volume = 0;          // older saved state had an on/off mute only
-    if (saved && Number.isFinite(saved.lastVolume) && saved.lastVolume > 0) lastVolume = clampVol(saved.lastVolume);
+    if (saved && saved.prefs === PREFS) {
+      if (Number.isFinite(saved.volume)) volume = clampVol(saved.volume);
+      if (Number.isFinite(saved.lastVolume) && saved.lastVolume > 0) lastVolume = clampVol(saved.lastVolume);
+    } else { volume = 0; lastVolume = 50; }   // first open, or settings saved before the louder chime: start muted
     if (saved && SIZES.includes(saved.size)) size = saved.size;
     // Thresholds already passed while the page was closed count as fired: never replay them.
     const now = Date.now();
@@ -341,7 +342,6 @@ body.three .stage{--cols:3}
     num: root.querySelector('.num'),
     btn: root.querySelector('.go'),
     btnText: root.querySelector('.go-text'),
-    probe: root.querySelector('.probe'),
     last: root.querySelector('.last'),
     note: root.querySelector('.note'),
     wake: root.querySelector('.wake'),
@@ -353,7 +353,6 @@ body.three .stage{--cols:3}
   let noteTimer = 0;
   const volEl = document.getElementById('volume');
   const sizeBtns = [...document.querySelectorAll('.seg .ctl')];
-  let tight = false;
 
   /* ---------- audio (Web Audio only) ---------- */
   let ctx = null, master = null, suspendTimer = 0;
@@ -388,35 +387,47 @@ body.three .stage{--cols:3}
   }
 
   /* SYNTH-START */
-  // Soft chimes: pure sine tones with a quiet octave for warmth, a gentle 15 ms attack and a long fade.
-  // Every note stays under 1 kHz and has no sharp overtones, so nothing sounds piercing.
+  // A loud but rounded chime: each note is a sine with two softer overtones (a bell-like tone, no buzz),
+  // a gentle 15 ms attack, a short hold at full level and a long fade. A soft limiter keeps the peaks
+  // just under full scale, so it is as loud as the output allows without harsh clipping.
   const CHIMES = {
-    close: { level: 1.2, notes: [[659.25, 0, 1.6], [987.77, 0.22, 1.9]] },                 // E5 -> B5, rising: close the case now
+    close: {                                         // E5 -> B5, rising: close the case now
+      drive: 1.8, level: 0.97, hold: 0.18,
+      notes: [[659.25, 0, 1.7], [987.77, 0.22, 2.1]],
+      partials: [[1, 0.6, 1], [2, 0.3, 0.6], [3, 0.14, 0.4]]   // [harmonic, level, share of the fade]
+    }
   };
+  const LIMIT = 3;                                   // limiter input range, in units of full scale
+  const softCurve = new Float32Array(2049);
+  for (let i = 0; i < softCurve.length; i++) softCurve[i] = Math.tanh((i / 1024 - 1) * LIMIT) / Math.tanh(LIMIT);
   function chime(c, out, t0, p, nodes) {
-    const level = c.createGain();
+    const pre = c.createGain(), limiter = c.createWaveShaper(), level = c.createGain();
+    pre.gain.value = p.drive / LIMIT;
+    limiter.curve = softCurve;
+    limiter.oversample = '4x';
     level.gain.value = p.level;
-    level.connect(out);
-    let last = null;
+    pre.connect(limiter); limiter.connect(level); level.connect(out);
+    let last = null, lastStop = 0;
     for (const [freq, delay, decay] of p.notes) {
       const at = t0 + delay;
-      for (const [mult, amp] of [[1, 0.5], [2, 0.06]]) {
-        const o = c.createOscillator(), g = c.createGain();
+      for (const [mult, amp, share] of p.partials) {
+        const o = c.createOscillator(), g = c.createGain(), end = at + p.hold + (decay - p.hold) * share;
         o.type = 'sine';
         o.frequency.setValueAtTime(freq * mult, at);
         g.gain.setValueAtTime(0, at);
         g.gain.linearRampToValueAtTime(amp, at + 0.015);
-        g.gain.exponentialRampToValueAtTime(0.0001, at + decay * (mult === 1 ? 1 : 0.5));
-        o.connect(g); g.connect(level);
-        o.start(at); o.stop(at + decay + 0.05);
+        g.gain.setValueAtTime(amp, at + p.hold);
+        g.gain.exponentialRampToValueAtTime(0.0001, end);
+        o.connect(g); g.connect(pre);
+        o.start(at); o.stop(end + 0.05);
         nodes.push(o);
-        last = o;
+        if (end >= lastStop) { last = o; lastStop = end; }
       }
     }
     last.onended = () => { try { level.disconnect(); } catch (e) {} };
   }
   /* SYNTH-END */
-  // 207s: soft rising chime (close now). It is the only sound.
+  // 207s: rising chime (close now). It is the only sound.
   function buildSound(T, at) {
     const nodes = [];
     chime(ctx, master, at, CHIMES.close, nodes);
@@ -511,11 +522,12 @@ body.three .stage{--cols:3}
     if (refit) fit();
   }
   // Returns true when a top label appears or disappears, so the number can be re-fitted.
-  const hasLabel = state => state === 'orange' || state === 'black';
+  const hasLabel = state => state === 'orange' || state === 'black';   // orange: on the button; black: above the number
   function setState(v, state) {
     const was = v.root.dataset.state;
     if (was === state) return false;
     v.root.dataset.state = state;
+    paintButton(v);
     return hasLabel(was) || hasLabel(state);
   }
   // While any timer is in 207-214 the tab title reads "CLOSE Case" with a square that blinks once a second.
@@ -529,11 +541,17 @@ body.three .stage{--cols:3}
     const want = s < 0 ? BASE_TITLE : (s % 2 ? '\u{1F7E7} ' : '\u2B1C ') + CLOSE_TITLE;
     if (document.title !== want) document.title = want;
   }
+  // START when idle, RESET while running, CLOSE NOW during 207-214 (pressing it still resets).
+  function paintButton(v) {
+    const running = v.root.classList.contains('is-running');
+    const text = !running ? 'START' : v.root.dataset.state === 'orange' ? 'CLOSE NOW' : 'RESET';
+    if (v.btnText.textContent !== text) v.btnText.textContent = text;
+  }
   function paintPanel(i) {
     const t = timers[i], v = ui[i];
     v.root.classList.toggle('is-running', t.running);
-    v.btnText.textContent = t.running ? (tight ? 'STOP' : 'STOP / RESET') : 'START';
-    v.btn.setAttribute('aria-label', (t.running ? 'Stop and reset timer ' : 'Start timer ') + (i + 1));
+    paintButton(v);
+    v.btn.setAttribute('aria-label', (t.running ? 'Reset timer ' : 'Start timer ') + (i + 1));
     const refit = !t.running && setState(v, 'base');
     if (t.last == null) v.last.textContent = 'Last: –';
     else {
@@ -569,7 +587,7 @@ body.three .stage{--cols:3}
     const locked = three && timers[2].running;
     thirdBtn.setAttribute('aria-pressed', String(three));
     thirdBtn.dataset.locked = String(locked);
-    const label = !three ? 'Add a third timer' : locked ? 'Stop the third timer first' : 'Remove the third timer';
+    const label = !three ? 'Add a third timer' : locked ? 'Reset the third timer first' : 'Remove the third timer';
     thirdBtn.setAttribute('aria-label', label);
     thirdBtn.title = label;
   }
@@ -595,7 +613,7 @@ body.three .stage{--cols:3}
 
   /* ---------- auto-fit ---------- */
   // Digit metrics in em (defaults match the embedded font; re-measured once fonts are ready).
-  const M = { cell: 0.5054, ink: 0.731, dy: 0.0137, close: 6.4, wake: 9.3, wake1: 6.6 };   // label widths in em: "CLOSE NOW", "WA 3YE9TI SED", and its longer line "WA 3YE9TI"
+  const M = { cell: 0.5054, ink: 0.731, dy: 0.0137, wake: 9.3, wake1: 6.6 };   // label widths in em: "WA 3YE9TI SED" and its longer line "WA 3YE9TI"
   function measure() {
     try {
       const c = document.createElement('canvas').getContext('2d');
@@ -615,7 +633,7 @@ body.three .stage{--cols:3}
   }
   function measureClose() {
     const probe = document.getElementById('close-probe');
-    for (const [key, text] of [['close', 'CLOSE NOW'], ['wake', 'WA 3YE9TI SED'], ['wake1', 'WA 3YE9TI']]) {
+    for (const [key, text] of [['wake', 'WA 3YE9TI SED'], ['wake1', 'WA 3YE9TI']]) {
       probe.textContent = text;
       const w = probe.offsetWidth;
       if (w > 0) M[key] = w / 100;
@@ -628,7 +646,7 @@ body.three .stage{--cols:3}
       if (!W || !H0) continue;
       const nb = v.note && v.root.classList.contains('show-note') ? v.note.offsetHeight + 3 : 0;
       const state = v.root.dataset.state;
-      let closeFs = Math.max(10, Math.floor(Math.min(W * 0.94 / M.close, H0 * 0.2, 96))), lines = 1;
+      let closeFs = 14, lines = 1;
       if (state === 'black') {
         // One line when it is big enough; otherwise "WA 3YE9TI" / "SED" on two lines if that is bigger or the only way to fit the width.
         const one = Math.floor(Math.min(W * 0.94 / M.wake, H0 * 0.2, 96));
@@ -638,7 +656,7 @@ body.three .stage{--cols:3}
         else { lines = 2; closeFs = Math.max(10, two); }
         v.wake.classList.toggle('two', lines === 2);
       }
-      const nt = hasLabel(state) ? lines * Math.ceil(closeFs * 1.1) + 2 : 0;
+      const nt = state === 'black' ? lines * Math.ceil(closeFs * 1.1) + 2 : 0;
       v.numbox.style.setProperty('--nb', nb + 'px');
       v.numbox.style.setProperty('--nt', nt + 'px');
       v.numbox.style.setProperty('--close-fs', closeFs + 'px');
@@ -649,8 +667,13 @@ body.three .stage{--cols:3}
       // The 40px floor gives way only on a black card in a window too small to hold the label and a 40px number.
       v.num.style.fontSize = Math.max(state === 'black' ? MIN_NUM_BLACK_PX : MIN_NUM_PX, Math.floor(px)) + 'px';
     }
-    const nowTight = ui.some(v => v.probe.offsetWidth > v.btn.clientWidth * 0.78);
-    if (nowTight !== tight) { tight = nowTight; ui.forEach((_, i) => paintPanel(i)); }
+    // CLOSE NOW is longer than RESET: shrink it just enough to fit a narrow button.
+    for (const v of ui) {
+      v.btnText.style.fontSize = '';
+      if (v.root.dataset.state !== 'orange' || !v.btn.clientWidth) continue;
+      const room = v.btn.clientWidth - 8, need = v.btnText.offsetWidth;
+      if (need > room) v.btnText.style.fontSize = Math.max(8, Math.floor(parseFloat(getComputedStyle(v.btn).fontSize) * room / need * 10) / 10) + 'px';
+    }
   }
   let fitQueued = false;
   function queueFit() {
@@ -744,7 +767,7 @@ body.three .stage{--cols:3}
   });
   muteBtn.addEventListener('click', e => {
     if (volume > 0) { lastVolume = volume; volume = 0; stopPreview(); }
-    else volume = lastVolume > 0 ? lastVolume : 100;
+    else volume = lastVolume > 0 ? lastVolume : 50;
     save();
     paintControls();
     if (e.detail > 0) muteBtn.blur();

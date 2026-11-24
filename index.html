@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F7F9">
+<title>Case Timers</title>
+<style>
+@font-face{
+  font-family:"Case Digits"; /* Roboto Condensed Bold, digits 0-9 only (SIL Open Font License) */
+  src:url("data:font/woff;base64,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") format("woff");
+  font-weight:700; font-style:normal; font-display:block;
+}
+:root{
+  /* Layout: a slim control bar on top, then two (or three) equal timer cards side by side that fill the rest of the window.
+     Card states: white under 200s, pale green from 200, pulsing orange with CLOSE NOW from 207, solid red from 215, black with WA 3YE9TI SED from 370. The count stops at 999. */
+  --bg:#F6F7F9;
+  --card:#FFFFFF;
+  --line:#D9DDE3;
+  --line-live:#8A93A1;
+  --ink:#0B0D12;
+  --muted:#5B6472;
+  --accent:#2563EB;
+  --green:#16A34A;  --green-tint:#DCFCE7; --green-deep:#15803D;
+  --orange:#EA580C; --orange-tint:#FFEDD5; --orange-strong:#FDBA74; --orange-deep:#C2410C; --close-ink:#7C2D12;
+  --red:#DC2626;    --red-deep:#B91C1C;
+  --note:#991B1B;
+  --font-ui:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-num:"Case Digits",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --dy:0.0137;
+  --ctl:clamp(18px,3vmin,26px);
+  color-scheme:light;
+}
+
+/* Size presets. Medium is the default; Small and Large override it. */
+body{
+  --max-w:920px; --max-h:470px;
+  --out:clamp(4px,1.4vmin,14px);
+  --gap:clamp(6px,1.6vmin,16px);
+  --pad:clamp(6px,2.4cqmin,18px);
+  --tgap:clamp(3px,1.6cqmin,12px);
+  --rad:clamp(8px,2cqmin,16px);
+  --btn-h:clamp(38px,15cqh,68px);
+  --btn-fs:clamp(12px,4.4cqmin,19px);
+  --last-fs:clamp(12px,4.2cqmin,19px);
+}
+body[data-size="large"]{
+  --max-w:100000px; --max-h:100000px;
+  --out:clamp(4px,1.4vmin,20px);
+  --gap:clamp(6px,1.6vmin,24px);
+  --pad:clamp(6px,2.4cqmin,30px);
+  --tgap:clamp(3px,1.6cqmin,18px);
+  --rad:clamp(8px,2cqmin,22px);
+  --btn-h:clamp(40px,15cqh,124px);
+  --btn-fs:clamp(13px,4.6cqmin,34px);
+  --last-fs:clamp(12px,4.4cqmin,34px);
+}
+body[data-size="small"]{
+  --max-w:460px; --max-h:215px;
+  --out:3px;
+  --gap:4px;
+  --pad:3px;
+  --tgap:2px;
+  --rad:6px;
+  --btn-h:clamp(36px,21cqh,46px);
+  --btn-fs:clamp(12px,7.5cqh,15px);
+  --last-fs:clamp(12px,7cqh,14px);
+}
+body.three[data-size="medium"]{--max-w:1320px}
+body.three[data-size="small"]{--max-w:660px}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; display:flex; flex-direction:column; overflow:hidden;
+  background:var(--bg); color:var(--ink); font-family:var(--font-ui);
+  -webkit-user-select:none; user-select:none;
+  touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  overscroll-behavior:none;
+}
+button{font:inherit; color:inherit; margin:0; cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* Control bar: its own row, so it can never sit on top of a number. */
+.bar{flex:none; display:flex; justify-content:flex-end; align-items:center; gap:calc(var(--ctl) * .3); padding:2px 3px}
+.ctl{
+  position:relative; display:grid; place-items:center; padding:0;
+  width:var(--ctl); height:var(--ctl);
+  background:transparent; border:1px solid transparent; border-radius:5px; color:var(--muted);
+}
+.ctl:hover{color:var(--ink)}
+.ctl svg{width:78%; height:78%; display:block}
+#third{border-color:var(--line); background:var(--card)}
+#third .minus{display:none}
+#third[aria-pressed="true"] .plus{display:none}
+#third[aria-pressed="true"] .minus{display:block}
+#third[aria-pressed="true"]{color:var(--ink); border-color:var(--line-live)}
+#third[data-locked="true"]{opacity:.4}
+#mute .x{display:none}
+#mute[data-level="off"] .w1, #mute[data-level="off"] .w2{display:none}
+#mute[data-level="off"] .x{display:inline}
+#mute[data-level="low"] .w2{display:none}
+#mute[aria-pressed="true"]{color:var(--ink); background:var(--line)}
+body.audio-locked #mute::after{
+  content:""; position:absolute; top:0; right:0; width:6px; height:6px; border-radius:50%; background:var(--accent);
+}
+.volgrp{display:flex; align-items:center; gap:2px}
+.vol{
+  --th:max(12px,calc(var(--ctl) * .55)); --v:1;
+  -webkit-appearance:none; appearance:none; display:block; margin:0; padding:0;
+  width:clamp(60px,22vw,160px); height:var(--ctl); background:transparent; cursor:pointer;
+}
+.vol::-webkit-slider-runnable-track{
+  height:4px; border-radius:2px;
+  background:linear-gradient(to right, var(--accent) 0 calc(var(--th) / 2 + (100% - var(--th)) * var(--v)), var(--line) 0);
+}
+.vol::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:var(--th); height:var(--th); margin-top:calc((4px - var(--th)) / 2);
+  border:0; border-radius:50%; background:var(--ink);
+}
+.vol::-moz-range-track{height:4px; border-radius:2px; background:var(--line)}
+.vol::-moz-range-progress{height:4px; border-radius:2px; background:var(--accent)}
+.vol::-moz-range-thumb{width:var(--th); height:var(--th); border:0; border-radius:50%; background:var(--ink)}
+.vol:hover::-webkit-slider-thumb{background:var(--accent)}
+.vol:hover::-moz-range-thumb{background:var(--accent)}
+.vol:focus{outline:none}
+.vol:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-radius:4px}
+.seg{display:flex; border:1px solid var(--line); border-radius:5px; overflow:hidden; background:var(--card)}
+.seg .ctl{border:0; border-radius:0; font-size:calc(var(--ctl) * .52); font-weight:700; line-height:1; height:calc(var(--ctl) - 2px)}
+.seg .ctl[aria-pressed="true"]{background:var(--line); color:var(--ink)}
+.seg .ctl:focus-visible{outline-offset:-2px}
+
+.wrap{
+  flex:1 1 0; min-height:0; display:grid; grid-template:minmax(0,1fr) / minmax(0,1fr); place-items:center;
+  padding:0 var(--out) var(--out);
+}
+.stage{
+  --cols:2;
+  container-type:size;
+  width:min(100%,var(--max-w)); height:min(88%,var(--max-h));
+  display:grid; grid-template-columns:repeat(var(--cols),minmax(0,1fr)); gap:var(--gap);
+}
+body.three .stage{--cols:3}
+.timer{
+  display:flex; flex-direction:column; gap:var(--tgap); min-width:0; min-height:0;
+  padding:var(--pad); background:var(--card); border:2px solid var(--line); border-radius:var(--rad);
+}
+.timer[hidden]{display:none}
+.timer.is-running{border-color:var(--line-live)}
+.timer[data-state="green"]{background:var(--green-tint); border-color:var(--green)}
+/* 207-214: close the case now. The card breathes between pale and stronger orange once a second. */
+@keyframes close-pulse{0%,100%{background-color:var(--orange-tint)} 50%{background-color:var(--orange-strong)}}
+.timer[data-state="orange"]{background:var(--orange-tint); border-color:var(--orange); animation:close-pulse 1s ease-in-out infinite}
+.timer[data-state="red"]{background:var(--red); border-color:var(--red)}
+.timer[data-state="black"]{background:#000000; border-color:#000000}
+
+.numbox{flex:1 1 0; min-height:0; position:relative; --nb:0px; --nt:0px}
+.num{
+  position:absolute; left:50%; top:calc(50% + (var(--nt) - var(--nb)) / 2);
+  transform:translate(-50%,calc(-50% + var(--dy) * 1em));
+  font-family:var(--font-num); font-weight:700; font-size:clamp(40px,min(24vw,40vh),600px); line-height:1;
+  font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;
+  white-space:nowrap; pointer-events:none; color:var(--ink);
+}
+.timer[data-state="green"] .num{color:var(--green)}
+.timer[data-state="orange"] .num{color:var(--orange-deep)}   /* deeper orange: stays readable at the peak of the pulse */
+.timer[data-state="red"] .num{color:#FFFFFF}
+.timer[data-state="black"] .num{color:#FFFFFF}
+/* Top labels, above the number; the number moves down to make room.
+   "CLOSE NOW" while the card is orange, "WA 3YE9TI SED" while it is black. */
+.close,.wake{
+  display:none; position:absolute; left:50%; top:0; transform:translateX(-50%); white-space:nowrap; text-align:center;
+  font-size:var(--close-fs,14px); font-weight:900; line-height:1.1; letter-spacing:.04em; pointer-events:none;
+}
+.close{color:var(--close-ink)}
+.wake{color:#FFFFFF}
+.wake.two span{display:block}   /* narrow cards: two lines, so the text stays big */
+.timer[data-state="orange"] .close{display:block}
+.timer[data-state="black"] .wake{display:block}
+.close-probe{
+  position:absolute; left:-9999px; top:0; visibility:hidden; white-space:nowrap; pointer-events:none;
+  font-size:100px; font-weight:900; line-height:1.1; letter-spacing:.04em;
+}
+/* "Stop this timer first": under the number inside the third card; the number moves up to make room. */
+.note{
+  display:none; position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+  width:max-content; max-width:100%; padding:.15em .6em; text-align:center; text-wrap:balance;
+  font-size:var(--last-fs); font-weight:700; line-height:1.2;
+  color:var(--note); background:#FFFFFF; border:1.5px solid var(--note); border-radius:.7em; pointer-events:none;
+}
+.timer.show-note .note{display:block}
+
+.go{
+  position:relative; flex:none; display:flex; align-items:center; justify-content:center; gap:.5em;
+  width:100%; height:var(--btn-h); padding:0 8px; overflow:hidden; white-space:nowrap;
+  font-size:var(--btn-fs); font-weight:800; letter-spacing:.06em;
+  border-radius:calc(var(--rad) * .7); border:1.5px solid transparent;
+  background:var(--accent); color:#FFFFFF;
+}
+.go::before{
+  content:""; flex:none; width:.62em; height:.7em; background:currentColor;
+  clip-path:polygon(0 0,100% 50%,0 100%);
+}
+.go:hover{filter:brightness(1.08)}
+.go:active{filter:brightness(.92)}
+.timer.is-running .go{background:#FFFFFF; color:var(--ink); border-color:var(--ink)}
+.timer.is-running .go:hover{filter:brightness(.96)}
+.timer.is-running .go::before{width:.62em; height:.62em; clip-path:none; border-radius:1px}
+.probe{position:absolute; left:0; top:0; visibility:hidden; pointer-events:none; padding-left:1.12em}
+
+.last{
+  flex:none; text-align:center; white-space:nowrap;
+  font-size:var(--last-fs); font-weight:600; line-height:1.3;
+  font-variant-numeric:tabular-nums; color:var(--muted);
+}
+.timer[data-state="orange"] .last{color:#3B4250}
+.timer[data-state="red"] .last{color:#FFFFFF}
+.timer[data-state="black"] .last{color:#FFFFFF}
+.last .val{
+  display:inline-block; padding:0 .45em; border-radius:.6em; font-weight:800;
+  background:#E5E7EB; color:var(--ink); box-shadow:0 0 0 1.5px #FFFFFF;
+}
+</style>
+</head>
+<body>
+<div class="bar">
+  <button class="ctl" id="third" type="button" aria-pressed="false" aria-label="Add a third timer" title="Add a third timer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path class="plus" d="M12 5v14M5 12h14"/><path class="minus" d="M5 12h14"/></svg>
+  </button>
+  <div class="volgrp">
+    <button class="ctl" id="mute" type="button" data-level="high" aria-pressed="false" aria-label="Mute sounds" title="Mute sounds">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z" fill="currentColor"/><path class="w1" d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path class="w2" d="M18.3 6.5a8 8 0 0 1 0 11"/><g class="x"><path d="M16 9.5l5 5"/><path d="M21 9.5l-5 5"/></g></svg>
+    </button>
+    <input class="vol" id="volume" type="range" min="0" max="100" step="1" value="100" aria-label="Alert volume" aria-valuetext="100%" title="Alert volume: 100%">
+  </div>
+  <div class="seg" role="group" aria-label="Size">
+    <button class="ctl" id="size-small" type="button" data-size="small" aria-pressed="false" aria-label="Small size" title="Small">S</button>
+    <button class="ctl" id="size-medium" type="button" data-size="medium" aria-pressed="false" aria-label="Medium size" title="Medium">M</button>
+    <button class="ctl" id="size-large" type="button" data-size="large" aria-pressed="false" aria-label="Large size" title="Large">L</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <main class="stage" id="stage">
+    <section class="timer" aria-label="Timer 1" data-state="base">
+      <div class="numbox"><div class="close">CLOSE NOW</div><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 1 seconds">0</div></div>
+      <button class="go" id="go-1" type="button" aria-label="Start timer 1"><span class="go-text">START</span><span class="probe" aria-hidden="true">STOP / RESET</span></button>
+      <div class="last">Last: –</div>
+    </section>
+    <section class="timer" aria-label="Timer 2" data-state="base">
+      <div class="numbox"><div class="close">CLOSE NOW</div><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 2 seconds">0</div></div>
+      <button class="go" id="go-2" type="button" aria-label="Start timer 2"><span class="go-text">START</span><span class="probe" aria-hidden="true">STOP / RESET</span></button>
+      <div class="last">Last: –</div>
+    </section>
+    <section class="timer" aria-label="Timer 3" data-state="base" hidden>
+      <div class="numbox"><div class="close">CLOSE NOW</div><div class="wake"><span>WA 3YE9TI</span> <span>SED</span></div><div class="num" role="timer" aria-label="Timer 3 seconds">0</div><div class="note" role="status">Stop this timer first</div></div>
+      <button class="go" id="go-3" type="button" aria-label="Start timer 3"><span class="go-text">START</span><span class="probe" aria-hidden="true">STOP / RESET</span></button>
+      <div class="last">Last: –</div>
+    </section>
+  </main>
+</div>
+<span class="close-probe" id="close-probe" aria-hidden="true">CLOSE NOW</span>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- rules ---------- */
+  const T_IN = 200, T_CLOSE = 207, T_OVER = 215;   // green, orange (close the case now), red
+  const T_WAKE = 370;                              // black card with the WA 3YE9TI SED label
+  const T_MAX = 999;                               // the count stops here until STOP / RESET
+  const ALERTS = [T_CLOSE];                        // one chime, at 207
+  const stateFor = s => s >= T_WAKE ? 'black' : s >= T_OVER ? 'red' : s >= T_CLOSE ? 'orange' : s >= T_IN ? 'green' : 'base';
+  const BASE_TITLE = document.title;
+  const CLOSE_TITLE = 'CLOSE Case';
+  const NOTE_MS = 3000;
+  const CLICK_LOCK_MS = 300;   // a double-click can never stop-then-start (or start-then-stop)
+  const MIN_NUM_PX = 40;
+  const MIN_NUM_BLACK_PX = 24;
+
+  /* ---------- state ---------- */
+  const KEY = 'caseTimers.v1';
+  const SIZES = ['small', 'medium', 'large'];
+  const blank = () => ({ running: false, startedAt: null, capped: false, last: null, fired: { 207: false } });
+  let timers = [blank(), blank(), blank()];
+  let three = false;      // third timer shown
+  let volume = 100;       // 0 = off, 100 = loudest
+  let lastVolume = 100;   // restored by the speaker button after muting
+  const clampVol = v => Math.min(100, Math.max(0, Math.round(v)));
+  // Even steps in loudness: each slider step is 0.4 dB, so the range spans 40 dB from barely audible to max.
+  const gainFor = v => v <= 0 ? 0 : Math.pow(10, (v - 100) * 0.4 / 20);
+  let size = 'medium';
+
+  // A capped timer has stopped counting for good: it reads 999 whatever the clock says.
+  const elapsed = (t, now) => !t.running ? 0 : t.capped ? T_MAX : Math.min(T_MAX, Math.max(0, Math.floor((now - t.startedAt) / 1000)));
+  const anyRunning = () => timers.some(t => t.running && !t.capped);   // still counting
+
+  function cleanTimer(o) {
+    const t = blank();
+    if (!o || typeof o !== 'object') return t;
+    if (Number.isFinite(o.last) && o.last >= 0) t.last = Math.floor(o.last);
+    if (o.running === true && Number.isFinite(o.startedAt) && o.startedAt > 0) {
+      t.running = true;
+      t.startedAt = o.startedAt;
+      t.capped = o.capped === true;
+      t.fired[207] = !!(o.fired && o.fired[207]);
+    }
+    return t;
+  }
+  function readStore() {
+    try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({ timers, three, volume, lastVolume, size })); } catch (e) { /* works without persistence */ }
+  }
+  function adopt(saved) {
+    const list = saved && Array.isArray(saved.timers) ? saved.timers : [];
+    timers = [cleanTimer(list[0]), cleanTimer(list[1]), cleanTimer(list[2])];
+    three = !!(saved && saved.three === true) || timers[2].running;   // a running third timer is never hidden
+    if (!three) timers[2] = blank();
+    if (saved && Number.isFinite(saved.volume)) volume = clampVol(saved.volume);
+    else if (saved && saved.muted === true) volume = 0;          // older saved state had an on/off mute only
+    if (saved && Number.isFinite(saved.lastVolume) && saved.lastVolume > 0) lastVolume = clampVol(saved.lastVolume);
+    if (saved && SIZES.includes(saved.size)) size = saved.size;
+    // Thresholds already passed while the page was closed count as fired: never replay them.
+    const now = Date.now();
+    let changed = false;
+    for (const t of timers) {
+      if (!t.running) continue;
+      const s = elapsed(t, now);
+      for (const T of ALERTS) if (s >= T && !t.fired[T]) { t.fired[T] = true; changed = true; }
+      if (s >= T_MAX && !t.capped) { t.capped = true; changed = true; }
+    }
+    return changed;
+  }
+
+  /* ---------- elements ---------- */
+  const ui = [...document.querySelectorAll('.timer')].map(root => ({
+    root,
+    numbox: root.querySelector('.numbox'),
+    num: root.querySelector('.num'),
+    btn: root.querySelector('.go'),
+    btnText: root.querySelector('.go-text'),
+    probe: root.querySelector('.probe'),
+    last: root.querySelector('.last'),
+    note: root.querySelector('.note'),
+    wake: root.querySelector('.wake'),
+    shown: null,
+    lockUntil: 0
+  }));
+  const muteBtn = document.getElementById('mute');
+  const thirdBtn = document.getElementById('third');
+  let noteTimer = 0;
+  const volEl = document.getElementById('volume');
+  const sizeBtns = [...document.querySelectorAll('.seg .ctl')];
+  let tight = false;
+
+  /* ---------- audio (Web Audio only) ---------- */
+  let ctx = null, master = null, suspendTimer = 0;
+  const sched = [{ 207: null }, { 207: null }, { 207: null }];
+  const audioOn = () => !!ctx && ctx.state === 'running';
+
+  function ensureAudio() {
+    try {
+      if (!ctx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        ctx = new AC();
+        master = ctx.createGain();
+        master.gain.value = gainFor(volume);
+        master.connect(ctx.destination);
+        ctx.onstatechange = () => { syncAudio(); showAudioHint(); };
+      }
+      clearTimeout(suspendTimer);
+      if (ctx.state !== 'running') {
+        const p = ctx.resume();
+        if (p && p.then) p.then(() => { syncAudio(); showAudioHint(); }).catch(() => {});
+      }
+    } catch (e) { /* no sound available */ }
+  }
+  // Release the audio device while nothing is running.
+  function restAudio() {
+    clearTimeout(suspendTimer);
+    if (!ctx || anyRunning()) return;
+    suspendTimer = setTimeout(() => {
+      if (ctx && !anyRunning() && ctx.state === 'running') { try { ctx.suspend(); } catch (e) {} }
+    }, 4000);
+  }
+
+  /* SYNTH-START */
+  // Soft chimes: pure sine tones with a quiet octave for warmth, a gentle 15 ms attack and a long fade.
+  // Every note stays under 1 kHz and has no sharp overtones, so nothing sounds piercing.
+  const CHIMES = {
+    close: { level: 1.2, notes: [[659.25, 0, 1.6], [987.77, 0.22, 1.9]] },                 // E5 -> B5, rising: close the case now
+  };
+  function chime(c, out, t0, p, nodes) {
+    const level = c.createGain();
+    level.gain.value = p.level;
+    level.connect(out);
+    let last = null;
+    for (const [freq, delay, decay] of p.notes) {
+      const at = t0 + delay;
+      for (const [mult, amp] of [[1, 0.5], [2, 0.06]]) {
+        const o = c.createOscillator(), g = c.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(freq * mult, at);
+        g.gain.setValueAtTime(0, at);
+        g.gain.linearRampToValueAtTime(amp, at + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, at + decay * (mult === 1 ? 1 : 0.5));
+        o.connect(g); g.connect(level);
+        o.start(at); o.stop(at + decay + 0.05);
+        nodes.push(o);
+        last = o;
+      }
+    }
+    last.onended = () => { try { level.disconnect(); } catch (e) {} };
+  }
+  /* SYNTH-END */
+  // 207s: soft rising chime (close now). It is the only sound.
+  function buildSound(T, at) {
+    const nodes = [];
+    chime(ctx, master, at, CHIMES.close, nodes);
+    return nodes;
+  }
+  function cancel(s) {
+    if (!s) return;
+    for (const n of s.nodes) { try { n.onended = null; n.stop(0); } catch (e) {} try { n.disconnect(); } catch (e) {} }
+  }
+  // Alerts are queued on the audio clock ahead of time, so a throttled background tab still plays them on the second.
+  function syncAudio() {
+    if (!ctx) return;
+    const on = audioOn(), now = Date.now();
+    timers.forEach((t, i) => {
+      for (const T of ALERTS) {
+        const s = sched[i][T];
+        if (!t.running || t.fired[T]) {
+          if (s && s.at > ctx.currentTime) cancel(s);
+          sched[i][T] = null;
+          continue;
+        }
+        if (!on) continue;
+        const remain = (t.startedAt + T * 1000 - now) / 1000;
+        if (remain <= 0.02) continue;
+        const at = ctx.currentTime + remain;
+        if (s && Math.abs(s.at - at) < 0.1) continue;
+        cancel(s);
+        try { sched[i][T] = { at, nodes: buildSound(T, at) }; } catch (e) { sched[i][T] = null; }
+      }
+    });
+  }
+  function buzz(T) {
+    try { if (navigator.vibrate) navigator.vibrate(120); } catch (e) {}
+  }
+  // Called exactly once per run and threshold, when the clock crosses it.
+  function fireAlert(i, T, s) {
+    const queued = sched[i][T];
+    sched[i][T] = null;
+    if (T === T_CLOSE && s >= T_OVER) { cancel(queued); return; }   // woke up already in the red: too late for "close now"
+    buzz(T);
+    if (!audioOn()) { cancel(queued); return; }
+    if (queued && queued.at <= ctx.currentTime + 0.35) return;   // the queued sound is playing right now
+    cancel(queued);
+    try { buildSound(T, ctx.currentTime + 0.03); } catch (e) {}
+  }
+  // Plays the 207s chime at the chosen volume, so the level can be set without waiting for a real alert.
+  let preview = null;
+  function stopPreview() { if (preview) { cancel(preview); preview = null; } }
+  function playPreview() {
+    stopPreview();
+    if (volume <= 0) return;
+    ensureAudio();
+    if (!ctx) return;
+    const play = () => {
+      if (!audioOn() || volume <= 0) return;
+      stopPreview();
+      const at = ctx.currentTime + 0.03;
+      try { preview = { at, nodes: buildSound(T_CLOSE, at) }; } catch (e) { preview = null; }
+      restAudio();
+    };
+    if (audioOn()) play();
+    else { try { ctx.resume().then(play, () => {}); } catch (e) {} }
+  }
+  function showAudioHint() {
+    const off = volume === 0;
+    const locked = anyRunning() && !off && !audioOn();
+    document.body.classList.toggle('audio-locked', locked);
+    muteBtn.title = off ? 'Turn sound on' : locked ? 'Click anywhere to turn sound on' : 'Mute sounds';
+  }
+
+  /* ---------- screen wake lock ---------- */
+  let wake = null, touched = false;
+  async function keepAwake() {
+    if (!touched || document.visibilityState !== 'visible') return;
+    try {
+      if ('wakeLock' in navigator && (!wake || wake.released)) wake = await navigator.wakeLock.request('screen');
+    } catch (e) { /* unsupported or refused */ }
+  }
+
+  /* ---------- rendering ---------- */
+  function paintNumbers(now) {
+    let refit = false;
+    timers.forEach((t, i) => {
+      const s = elapsed(t, now), v = ui[i];
+      if (v.shown === s) return;
+      if (String(s).length !== String(v.shown).length) refit = true;
+      v.shown = s;
+      v.num.textContent = s;
+      if (setState(v, t.running ? stateFor(s) : 'base')) refit = true;
+    });
+    paintTitle(now);
+    if (refit) fit();
+  }
+  // Returns true when a top label appears or disappears, so the number can be re-fitted.
+  const hasLabel = state => state === 'orange' || state === 'black';
+  function setState(v, state) {
+    const was = v.root.dataset.state;
+    if (was === state) return false;
+    v.root.dataset.state = state;
+    return hasLabel(was) || hasLabel(state);
+  }
+  // While any timer is in 207-214 the tab title reads "CLOSE Case" with a square that blinks once a second.
+  function paintTitle(now) {
+    let s = -1;
+    for (const t of timers) {
+      if (!t.running) continue;
+      const e = elapsed(t, now);
+      if (e >= T_CLOSE && e < T_OVER) { s = e; break; }
+    }
+    const want = s < 0 ? BASE_TITLE : (s % 2 ? '\u{1F7E7} ' : '\u2B1C ') + CLOSE_TITLE;
+    if (document.title !== want) document.title = want;
+  }
+  function paintPanel(i) {
+    const t = timers[i], v = ui[i];
+    v.root.classList.toggle('is-running', t.running);
+    v.btnText.textContent = t.running ? (tight ? 'STOP' : 'STOP / RESET') : 'START';
+    v.btn.setAttribute('aria-label', (t.running ? 'Stop and reset timer ' : 'Start timer ') + (i + 1));
+    const refit = !t.running && setState(v, 'base');
+    if (t.last == null) v.last.textContent = 'Last: –';
+    else {
+      v.last.textContent = 'Last: ';
+      const chip = document.createElement('span');   // always grey, whatever the time was
+      chip.className = 'val';
+      chip.textContent = t.last + 's';
+      v.last.appendChild(chip);
+    }
+    if (refit) { paintTitle(Date.now()); fit(); }
+  }
+  function paintControls() {
+    document.body.dataset.size = size;
+    sizeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.size === size)));
+    paintVolume();
+    showAudioHint();
+  }
+  function paintVolume() {
+    const off = volume === 0, txt = off ? 'Off' : volume + '%';
+    if (+volEl.value !== volume) volEl.value = volume;
+    volEl.style.setProperty('--v', String(volume / 100));
+    volEl.setAttribute('aria-valuetext', txt);
+    volEl.title = 'Alert volume: ' + txt;
+    muteBtn.dataset.level = off ? 'off' : volume < 50 ? 'low' : 'high';
+    muteBtn.setAttribute('aria-pressed', String(off));
+    muteBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Mute sounds');
+    if (master) master.gain.value = gainFor(volume);
+  }
+  function paintThird() {
+    document.body.classList.toggle('three', three);
+    ui[2].root.hidden = !three;
+    if (!three) hideNote();
+    const locked = three && timers[2].running;
+    thirdBtn.setAttribute('aria-pressed', String(three));
+    thirdBtn.dataset.locked = String(locked);
+    const label = !three ? 'Add a third timer' : locked ? 'Stop the third timer first' : 'Remove the third timer';
+    thirdBtn.setAttribute('aria-label', label);
+    thirdBtn.title = label;
+  }
+  function showNote() {
+    ui[2].root.classList.add('show-note');
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(hideNote, NOTE_MS);
+    fit();
+  }
+  function hideNote() {
+    clearTimeout(noteTimer);
+    if (!ui[2].root.classList.contains('show-note')) return;
+    ui[2].root.classList.remove('show-note');
+    fit();
+  }
+  function paintAll() {
+    paintControls();
+    paintThird();
+    ui.forEach((_, i) => paintPanel(i));
+    paintNumbers(Date.now());
+    fit();
+  }
+
+  /* ---------- auto-fit ---------- */
+  // Digit metrics in em (defaults match the embedded font; re-measured once fonts are ready).
+  const M = { cell: 0.5054, ink: 0.731, dy: 0.0137, close: 6.4, wake: 9.3, wake1: 6.6 };   // label widths in em: "CLOSE NOW", "WA 3YE9TI SED", and its longer line "WA 3YE9TI"
+  function measure() {
+    try {
+      const c = document.createElement('canvas').getContext('2d');
+      c.font = '700 200px ' + getComputedStyle(ui[0].num).fontFamily;
+      let w = 0;
+      for (const d of '0123456789') w = Math.max(w, c.measureText(d).width);
+      const m = c.measureText('0123456789');
+      const asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent;
+      if (w > 0 && asc > 0 && Number.isFinite(desc)) {
+        M.cell = w / 200;
+        M.ink = (asc + desc) / 200;
+        const A = m.fontBoundingBoxAscent, D = m.fontBoundingBoxDescent;
+        M.dy = (Number.isFinite(A) && Number.isFinite(D)) ? ((asc - desc) - (A - D)) / 400 : 0;
+      }
+    } catch (e) { /* keep defaults */ }
+    document.documentElement.style.setProperty('--dy', M.dy.toFixed(4));
+  }
+  function measureClose() {
+    const probe = document.getElementById('close-probe');
+    for (const [key, text] of [['close', 'CLOSE NOW'], ['wake', 'WA 3YE9TI SED'], ['wake1', 'WA 3YE9TI']]) {
+      probe.textContent = text;
+      const w = probe.offsetWidth;
+      if (w > 0) M[key] = w / 100;
+    }
+  }
+  function fit() {
+    const scale = size === 'medium' ? 0.85 : 1;
+    for (const v of ui) {
+      const W = v.numbox.clientWidth, H0 = v.numbox.clientHeight;
+      if (!W || !H0) continue;
+      const nb = v.note && v.root.classList.contains('show-note') ? v.note.offsetHeight + 3 : 0;
+      const state = v.root.dataset.state;
+      let closeFs = Math.max(10, Math.floor(Math.min(W * 0.94 / M.close, H0 * 0.2, 96))), lines = 1;
+      if (state === 'black') {
+        // One line when it is big enough; otherwise "WA 3YE9TI" / "SED" on two lines if that is bigger or the only way to fit the width.
+        const one = Math.floor(Math.min(W * 0.94 / M.wake, H0 * 0.2, 96));
+        const two = Math.floor(Math.min(W * 0.94 / M.wake1, H0 * 0.15, 96));
+        const oneFits = Math.max(10, one) * M.wake <= W;
+        if (one >= 14 || (oneFits && one >= two)) closeFs = Math.max(10, one);
+        else { lines = 2; closeFs = Math.max(10, two); }
+        v.wake.classList.toggle('two', lines === 2);
+      }
+      const nt = hasLabel(state) ? lines * Math.ceil(closeFs * 1.1) + 2 : 0;
+      v.numbox.style.setProperty('--nb', nb + 'px');
+      v.numbox.style.setProperty('--nt', nt + 'px');
+      v.numbox.style.setProperty('--close-fs', closeFs + 'px');
+      const H = H0 - nb - nt;
+      if (H <= 0) continue;
+      const digits = Math.max(3, String(v.shown == null ? 0 : v.shown).length);
+      const px = Math.min(W * 0.92 / (digits * M.cell), H * 0.9 / M.ink) * scale;
+      // The 40px floor gives way only on a black card in a window too small to hold the label and a 40px number.
+      v.num.style.fontSize = Math.max(state === 'black' ? MIN_NUM_BLACK_PX : MIN_NUM_PX, Math.floor(px)) + 'px';
+    }
+    const nowTight = ui.some(v => v.probe.offsetWidth > v.btn.clientWidth * 0.78);
+    if (nowTight !== tight) { tight = nowTight; ui.forEach((_, i) => paintPanel(i)); }
+  }
+  let fitQueued = false;
+  function queueFit() {
+    if (fitQueued) return;
+    fitQueued = true;
+    requestAnimationFrame(() => { fitQueued = false; fit(); });
+  }
+
+  /* ---------- clock ---------- */
+  let tickTimer = 0;
+  function tick() {
+    const now = Date.now();
+    let dirty = false, capped = false;
+    timers.forEach((t, i) => {
+      if (!t.running || t.capped) return;
+      const s = elapsed(t, now);
+      for (const T of ALERTS) {
+        if (s >= T && !t.fired[T]) { t.fired[T] = true; dirty = true; fireAlert(i, T, s); }
+      }
+      if (s >= T_MAX && !t.capped) { t.capped = true; dirty = true; capped = true; }
+    });
+    if (dirty) save();
+    paintNumbers(now);
+    syncAudio();
+    arm();
+    if (capped) restAudio();
+  }
+  // Wake up right after the next whole second of whichever timer is still counting. A capped timer needs no clock.
+  function arm() {
+    clearTimeout(tickTimer); tickTimer = 0;
+    const now = Date.now();
+    let wait = Infinity;
+    for (const t of timers) {
+      if (!t.running || t.capped) continue;
+      const into = ((now - t.startedAt) % 1000 + 1000) % 1000;
+      wait = Math.min(wait, 1000 - into);
+    }
+    if (wait !== Infinity) tickTimer = setTimeout(tick, Math.min(1000, Math.max(8, wait + 4)));
+  }
+
+  /* ---------- actions ---------- */
+  function start(i) {
+    const t = timers[i];
+    t.running = true;
+    t.startedAt = Date.now();
+    t.capped = false;
+    t.fired = { 207: false };
+    save();
+    paintPanel(i);
+    if (i === 2) paintThird();
+    ensureAudio();
+    tick();
+  }
+  function stopAndReset(i) {
+    const t = timers[i];
+    t.last = elapsed(t, Date.now());
+    t.running = false;
+    t.startedAt = null;
+    t.capped = false;
+    t.fired = { 207: false };
+    save();
+    paintPanel(i);
+    if (i === 2) { hideNote(); paintThird(); }
+    tick();          // repaints 0, drops this timer's queued alerts, never starts anything
+    restAudio();
+  }
+
+  ui.forEach((v, i) => {
+    v.btn.addEventListener('click', e => {
+      const now = performance.now();
+      if (now < v.lockUntil) return;
+      v.lockUntil = now + CLICK_LOCK_MS;
+      if (timers[i].running) stopAndReset(i); else start(i);
+      if (e.detail > 0) v.btn.blur();   // a stray Space/Enter later can't press it again
+      showAudioHint();
+    });
+  });
+  // One button adds the third timer and removes it again. A running third timer can't be removed: its card says why.
+  thirdBtn.addEventListener('click', e => {
+    if (e.detail > 0) thirdBtn.blur();
+    if (three && timers[2].running) { showNote(); return; }
+    three = !three;
+    timers[2] = blank();
+    ui[2].shown = null;
+    save();
+    paintThird();
+    paintPanel(2);
+    paintNumbers(Date.now());
+    fit();
+    syncAudio();
+  });
+  muteBtn.addEventListener('click', e => {
+    if (volume > 0) { lastVolume = volume; volume = 0; stopPreview(); }
+    else volume = lastVolume > 0 ? lastVolume : 100;
+    save();
+    paintControls();
+    if (e.detail > 0) muteBtn.blur();
+  });
+  // Dragging changes the level live; letting go saves it and plays the chime at that level.
+  volEl.addEventListener('input', () => {
+    volume = clampVol(+volEl.value);
+    if (volume === 0) stopPreview();
+    paintControls();
+  });
+  volEl.addEventListener('change', () => {
+    volume = clampVol(+volEl.value);
+    if (volume > 0) lastVolume = volume;
+    save();
+    paintControls();
+    playPreview();
+  });
+  volEl.addEventListener('pointerup', () => setTimeout(() => volEl.blur(), 0));
+  sizeBtns.forEach(b => b.addEventListener('click', e => {
+    size = b.dataset.size;
+    save();
+    paintControls();
+    fit();
+    if (e.detail > 0) b.blur();
+  }));
+
+  // First click anywhere unlocks audio and the wake lock (runs before the button's own handler).
+  document.addEventListener('click', () => {
+    touched = true;
+    if (!ctx || anyRunning()) ensureAudio();
+    restAudio();
+    keepAwake();
+    setTimeout(showAudioHint, 500);
+  }, true);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    tick();
+    keepAwake();
+    queueFit();
+  });
+  window.addEventListener('pageshow', () => { tick(); queueFit(); });
+  window.addEventListener('resize', queueFit);
+  if ('ResizeObserver' in window) new ResizeObserver(queueFit).observe(document.getElementById('stage'));
+
+  // Another window of this page changed the timers: follow it.
+  window.addEventListener('storage', e => {
+    if (e.key !== KEY) return;
+    if (adopt(readStore())) save();
+    paintAll();
+    tick();
+    restAudio();
+  });
+
+  /* ---------- boot ---------- */
+  const saved = readStore();
+  if (!saved || !SIZES.includes(saved.size)) {
+    size = (window.innerWidth < 420 || window.innerHeight < 260) ? 'small' : 'medium';
+  }
+  if (adopt(saved)) save();
+  measureClose();
+  paintAll();
+  tick();
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load('700 100px "Case Digits"', '0123456789').then(() => { measure(); fit(); }, () => { measure(); fit(); });
+  } else { measure(); fit(); }
+})();
+</script>
+</body>
+</html>
